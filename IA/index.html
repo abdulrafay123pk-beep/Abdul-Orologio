@@ -1,0 +1,870 @@
+            <!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdul Time Clock</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Navigation Header -->
+        <header class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 50 50" fill="none">
+                        <!-- Globo esterno -->
+                        <circle cx="25" cy="25" r="20" stroke="url(#navGradient)" stroke-width="2.5"/>
+                        
+                        <!-- Meridiani verticali -->
+                        <ellipse cx="25" cy="25" rx="20" ry="8" stroke="url(#navGradient)" stroke-width="1.8"/>
+                        <ellipse cx="25" cy="25" rx="14" ry="20" stroke="url(#navGradient)" stroke-width="1.8"/>
+                        <ellipse cx="25" cy="25" rx="7" ry="20" stroke="url(#navGradient)" stroke-width="1.8"/>
+                        
+                        <!-- Paralleli orizzontali -->
+                        <line x1="5" y1="25" x2="45" y2="25" stroke="url(#navGradient)" stroke-width="1.8"/>
+                        <ellipse cx="25" cy="25" rx="20" ry="12" stroke="url(#navGradient)" stroke-width="1.5"/>
+                        
+                        <defs>
+                            <linearGradient id="navGradient" x1="0" y1="0" x2="50" y2="50">
+                                <stop offset="0%" style="stop-color:#667eea"/>
+                                <stop offset="100%" style="stop-color:#764ba2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>Abdul Time</span>
+                </div>
+                <nav class="nav-menu">
+                    <a href="#home" class="nav-link active" data-i18n="nav.home">Home</a>
+                    <a href="#timer" class="nav-link" data-i18n="nav.timer">Timer</a>
+                    <a href="#orario" class="nav-link" data-i18n="nav.clock">Orario</a>
+                    <a href="contatti.html" class="nav-link" data-i18n="nav.contact">Contatti</a>
+                </nav>
+                <div class="nav-actions">
+                    <!-- Online Status Badge -->
+                    <div class="status-badge" id="online-status">
+                        <div class="status-dot"></div>
+                        <span class="status-text" data-i18n="header.online">Online</span>
+                    </div>
+                    
+                    <!-- Live Visitors Counter -->
+                    <div class="visitors-badge" title="Visitatori online">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <span id="live-visitors">--</span>
+                    </div>
+                    
+                    <button class="settings-btn" id="settings-btn" title="Impostazioni">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m13.2 5.2l-4.2-4.2m0-6l-4.2-4.2"></path>
+                        </svg>
+                    </button>
+                    <button class="menu-toggle" id="menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Background Animation -->
+        <div class="background">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+            <!-- HOME SECTION -->
+            <section id="home" class="section active">
+                <div class="container">
+                    <div class="hero">
+                        <div class="hero-icon">
+                            <svg width="80" height="80" viewBox="0 0 50 50" fill="none">
+                                <circle cx="25" cy="25" r="20" stroke="url(#heroGradient)" stroke-width="2.5" opacity="0.6"/>
+                                <circle cx="25" cy="25" r="23" stroke="url(#heroGradient)" stroke-width="1.5" opacity="0.3"/>
+                                <ellipse cx="25" cy="25" rx="20" ry="10" stroke="url(#heroGradient)" stroke-width="1.5" opacity="0.5"/>
+                                <ellipse cx="25" cy="25" rx="10" ry="20" stroke="url(#heroGradient)" stroke-width="1.5" opacity="0.5"/>
+                                <circle cx="25" cy="25" r="4" fill="url(#heroGradient)"/>
+                                <line x1="25" y1="25" x2="25" y2="15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="25" y1="25" x2="32" y2="25" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="heroGradient" x1="0" y1="0" x2="50" y2="50">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="100%" style="stop-color:#764ba2"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h1 data-i18n="hero.title">Abdul Time Clock</h1>
+                        <p class="hero-subtitle" data-i18n="hero.subtitle">La tua applicazione per gestire il tempo in modo intelligente</p>
+                        <div class="hero-buttons">
+                            <a href="#timer" class="btn btn-primary" data-i18n="hero.startTimer">Avvia Timer</a>
+                            <a href="#orario" class="btn btn-secondary" data-i18n="hero.viewClock">Vedi Orario</a>
+                        </div>
+                    </div>
+
+                    <!-- Current Time Display -->
+                    <div class="current-time-section">
+                        <div class="current-time-card">
+                            <div class="time-location">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                <span id="current-location">La tua posizione</span>
+                            </div>
+                            <div class="current-time-display">
+                                <div class="current-time" id="home-current-time">--:--:--</div>
+                                <div class="current-date" id="home-current-date">--</div>
+                            </div>
+                            <div class="quick-actions">
+                                <button class="quick-action-btn" onclick="document.querySelector('a[href=\'#timer\']').click()">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12 6 12 12 16 14"/>
+                                    </svg>
+                                    <span data-i18n="quick.timer">Timer</span>
+                                </button>
+                                <button class="quick-action-btn" onclick="document.querySelector('a[href=\'#orario\']').click()">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="2" y1="12" x2="22" y2="12"/>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                    </svg>
+                                    <span data-i18n="quick.worldclock">Orari Mondiali</span>
+                                </button>
+                                <button class="quick-action-btn" onclick="document.getElementById('settings-btn').click()">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="3"/>
+                                        <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m13.2 5.2l-4.2-4.2m0-6l-4.2-4.2"/>
+                                    </svg>
+                                    <span data-i18n="quick.settings">Impostazioni</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature Cards -->
+                    <div class="features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Stopwatch body -->
+                                    <circle cx="32" cy="36" r="22" fill="url(#timer1)" opacity="0.2"/>
+                                    <circle cx="32" cy="36" r="22" stroke="url(#timer1)" stroke-width="3"/>
+                                    <!-- Top button -->
+                                    <rect x="28" y="10" width="8" height="8" rx="2" fill="url(#timer1)"/>
+                                    <line x1="32" y1="18" x2="32" y2="14" stroke="url(#timer1)" stroke-width="2"/>
+                                    <!-- Clock hand -->
+                                    <line x1="32" y1="36" x2="32" y2="22" stroke="url(#timer1)" stroke-width="3" stroke-linecap="round"/>
+                                    <line x1="32" y1="36" x2="42" y2="36" stroke="url(#timer1)" stroke-width="2.5" stroke-linecap="round"/>
+                                    <circle cx="32" cy="36" r="3" fill="url(#timer1)"/>
+                                    <!-- Marks -->
+                                    <circle cx="32" cy="18" r="1.5" fill="url(#timer1)"/>
+                                    <circle cx="48" cy="36" r="1.5" fill="url(#timer1)"/>
+                                    <circle cx="32" cy="54" r="1.5" fill="url(#timer1)"/>
+                                    <circle cx="16" cy="36" r="1.5" fill="url(#timer1)"/>
+                                    <defs>
+                                        <linearGradient id="timer1" x1="0" y1="0" x2="64" y2="64">
+                                            <stop offset="0%" style="stop-color:#667eea"/>
+                                            <stop offset="100%" style="stop-color:#764ba2"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <h3 data-i18n="feature.timer.title">Timer Preciso</h3>
+                            <p data-i18n="feature.timer.desc">Imposta timer personalizzati con precisione al secondo. Perfetto per allenamenti, cucina o lavoro.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Globe -->
+                                    <circle cx="32" cy="32" r="26" fill="url(#world1)" opacity="0.15"/>
+                                    <circle cx="32" cy="32" r="26" stroke="url(#world1)" stroke-width="3"/>
+                                    <!-- Latitude lines -->
+                                    <ellipse cx="32" cy="32" rx="26" ry="8" stroke="url(#world1)" stroke-width="2"/>
+                                    <ellipse cx="32" cy="32" rx="26" ry="16" stroke="url(#world1)" stroke-width="1.5" opacity="0.5"/>
+                                    <!-- Longitude lines -->
+                                    <ellipse cx="32" cy="32" rx="10" ry="26" stroke="url(#world1)" stroke-width="2"/>
+                                    <ellipse cx="32" cy="32" rx="20" ry="26" stroke="url(#world1)" stroke-width="1.5" opacity="0.5"/>
+                                    <!-- Center dot -->
+                                    <circle cx="32" cy="32" r="4" fill="url(#world1)"/>
+                                    <!-- Location pins -->
+                                    <path d="M20 20 L20 14 L18 16 L16 14 L16 20 Z" fill="url(#world1)"/>
+                                    <path d="M44 25 L44 19 L42 21 L40 19 L40 25 Z" fill="url(#world1)"/>
+                                    <path d="M38 45 L38 39 L36 41 L34 39 L34 45 Z" fill="url(#world1)"/>
+                                    <defs>
+                                        <linearGradient id="world1" x1="0" y1="0" x2="64" y2="64">
+                                            <stop offset="0%" style="stop-color:#10b981"/>
+                                            <stop offset="100%" style="stop-color:#06b6d4"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <h3 data-i18n="feature.world.title">150+ Città Globali</h3>
+                            <p data-i18n="feature.world.desc">Visualizza l'orario di oltre 150 città in tutto il mondo in tempo reale.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Heart shape -->
+                                    <path d="M32 54 C32 54, 10 38, 10 22 C10 14, 16 8, 24 8 C28 8, 30 10, 32 14 C34 10, 36 8, 40 8 C48 8, 54 14, 54 22 C54 38, 32 54, 32 54 Z" fill="url(#fav1)" opacity="0.2"/>
+                                    <path d="M32 54 C32 54, 10 38, 10 22 C10 14, 16 8, 24 8 C28 8, 30 10, 32 14 C34 10, 36 8, 40 8 C48 8, 54 14, 54 22 C54 38, 32 54, 32 54 Z" stroke="url(#fav1)" stroke-width="3" stroke-linejoin="round"/>
+                                    <!-- Inner star -->
+                                    <path d="M32 20 L34 28 L42 28 L36 33 L38 41 L32 36 L26 41 L28 33 L22 28 L30 28 Z" fill="url(#fav1)"/>
+                                    <!-- Sparkles -->
+                                    <circle cx="18" cy="16" r="2" fill="url(#fav1)"/>
+                                    <circle cx="46" cy="16" r="2" fill="url(#fav1)"/>
+                                    <circle cx="50" cy="34" r="1.5" fill="url(#fav1)"/>
+                                    <circle cx="14" cy="34" r="1.5" fill="url(#fav1)"/>
+                                    <defs>
+                                        <linearGradient id="fav1" x1="0" y1="0" x2="64" y2="64">
+                                            <stop offset="0%" style="stop-color:#f59e0b"/>
+                                            <stop offset="100%" style="stop-color:#ef4444"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <h3 data-i18n="feature.favorites.title">Città Preferite</h3>
+                            <p data-i18n="feature.favorites.desc">Salva le tue città preferite per un accesso rapido e immediato.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Sun rays -->
+                                    <g opacity="0.6">
+                                        <line x1="32" y1="6" x2="32" y2="12" stroke="url(#theme1)" stroke-width="3" stroke-linecap="round"/>
+                                        <line x1="50" y1="14" x2="46" y2="18" stroke="url(#theme1)" stroke-width="3" stroke-linecap="round"/>
+                                        <line x1="58" y1="32" x2="52" y2="32" stroke="url(#theme1)" stroke-width="3" stroke-linecap="round"/>
+                                        <line x1="50" y1="50" x2="46" y2="46" stroke="url(#theme1)" stroke-width="3" stroke-linecap="round"/>
+                                    </g>
+                                    <!-- Moon crescent (dark side) -->
+                                    <circle cx="32" cy="32" r="16" fill="url(#theme1)" opacity="0.2"/>
+                                    <circle cx="32" cy="32" r="16" stroke="url(#theme1)" stroke-width="3"/>
+                                    <circle cx="38" cy="28" r="13" fill="#0a0a0f" opacity="0.8"/>
+                                    <!-- Stars -->
+                                    <circle cx="20" cy="20" r="1.5" fill="url(#theme1)"/>
+                                    <circle cx="22" cy="44" r="1.5" fill="url(#theme1)"/>
+                                    <circle cx="44" cy="40" r="2" fill="url(#theme1)"/>
+                                    <defs>
+                                        <linearGradient id="theme1" x1="0" y1="0" x2="64" y2="64">
+                                            <stop offset="0%" style="stop-color:#fbbf24"/>
+                                            <stop offset="100%" style="stop-color:#8b5cf6"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <h3 data-i18n="feature.theme.title">Tema Chiaro/Scuro</h3>
+                            <p data-i18n="feature.theme.desc">Passa dal tema scuro a quello chiaro secondo le tue preferenze.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Chat bubble 1 -->
+                                    <rect x="8" y="14" width="28" height="20" rx="4" fill="url(#lang1)" opacity="0.2"/>
+                                    <rect x="8" y="14" width="28" height="20" rx="4" stroke="url(#lang1)" stroke-width="2.5"/>
+                                    <path d="M16 34 L20 38 L16 38 Z" fill="url(#lang1)"/>
+                                    <!-- Chat bubble 2 -->
+                                    <rect x="28" y="30" width="28" height="20" rx="4" fill="url(#lang1)" opacity="0.2"/>
+                                    <rect x="28" y="30" width="28" height="20" rx="4" stroke="url(#lang1)" stroke-width="2.5"/>
+                                    <path d="M48 50 L44 54 L48 54 Z" fill="url(#lang1)"/>
+                                    <!-- Text lines in bubble 1 -->
+                                    <line x1="12" y1="20" x2="32" y2="20" stroke="url(#lang1)" stroke-width="2" stroke-linecap="round"/>
+                                    <line x1="12" y1="26" x2="26" y2="26" stroke="url(#lang1)" stroke-width="2" stroke-linecap="round"/>
+                                    <!-- Text lines in bubble 2 -->
+                                    <line x1="32" y1="36" x2="52" y2="36" stroke="url(#lang1)" stroke-width="2" stroke-linecap="round"/>
+                                    <line x1="32" y1="42" x2="48" y2="42" stroke="url(#lang1)" stroke-width="2" stroke-linecap="round"/>
+                                    <!-- Globe icon -->
+                                    <circle cx="42" cy="18" r="8" fill="url(#lang1)" opacity="0.3"/>
+                                    <circle cx="42" cy="18" r="8" stroke="url(#lang1)" stroke-width="2"/>
+                                    <ellipse cx="42" cy="18" rx="3" ry="8" stroke="url(#lang1)" stroke-width="1.5"/>
+                                    <line x1="34" y1="18" x2="50" y2="18" stroke="url(#lang1)" stroke-width="1.5"/>
+                                    <defs>
+                                        <linearGradient id="lang1" x1="0" y1="0" x2="64" y2="64">
+                                            <stop offset="0%" style="stop-color:#667eea"/>
+                                            <stop offset="100%" style="stop-color:#06b6d4"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <h3 data-i18n="feature.multilang.title">Multilingua</h3>
+                            <p data-i18n="feature.multilang.desc">Disponibile in 5 lingue: Italiano, Inglese, Spagnolo, Francese e Tedesco.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Desktop -->
+                                    <rect x="6" y="12" width="36" height="24" rx="2" fill="url(#device1)" opacity="0.2"/>
+                                    <rect x="6" y="12" width="36" height="24" rx="2" stroke="url(#device1)" stroke-width="2.5"/>
+                                    <rect x="16" y="36" width="16" height="2" rx="1" fill="url(#device1)"/>
+                                    <rect x="12" y="38" width="24" height="3" rx="1.5" fill="url(#device1)"/>
+                                    <!-- Tablet -->
+                                    <rect x="32" y="22" width="20" height="28" rx="2" fill="url(#device1)" opacity="0.15"/>
+                                    <rect x="32" y="22" width="20" height="28" rx="2" stroke="url(#device1)" stroke-width="2.5"/>
+                                    <circle cx="42" cy="47" r="1.5" fill="url(#device1)"/>
+                                    <!-- Phone -->
+                                    <rect x="46" y="30" width="12" height="20" rx="2" fill="url(#device1)" opacity="0.1"/>
+                                    <rect x="46" y="30" width="12" height="20" rx="2" stroke="url(#device1)" stroke-width="2"/>
+                                    <line x1="49" y1="33" x2="55" y2="33" stroke="url(#device1)" stroke-width="1.5" stroke-linecap="round"/>
+                                    <circle cx="52" cy="47" r="1" fill="url(#device1)"/>
+                                    <!-- Screen content lines -->
+                                    <line x1="10" y1="18" x2="28" y2="18" stroke="url(#device1)" stroke-width="1.5" opacity="0.5"/>
+                                    <line x1="10" y1="22" x2="24" y2="22" stroke="url(#device1)" stroke-width="1.5" opacity="0.5"/>
+                                    <defs>
+                                        <linearGradient id="device1" x1="0" y1="0" x2="64" y2="64">
+                                            <stop offset="0%" style="stop-color:#8b5cf6"/>
+                                            <stop offset="100%" style="stop-color:#ec4899"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <h3 data-i18n="feature.responsive.title">Design Responsive</h3>
+                            <p data-i18n="feature.responsive.desc">Funziona perfettamente su desktop, tablet e smartphone.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIMER SECTION -->
+            <section id="timer" class="section">
+                <div class="container">
+                    <h2 class="section-title" data-i18n="timer.title">⏰ Timer</h2>
+                    
+                    <div class="timer-container">
+                        <div class="timer-display-large" id="timer-display">
+                            <span class="time-part">00</span>
+                            <span class="separator">:</span>
+                            <span class="time-part">00</span>
+                        </div>
+                        
+                        <div class="timer-controls">
+                            <div class="timer-inputs">
+                                <div class="input-group">
+                                    <label data-i18n="timer.minutes">Minuti</label>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="timer-minutes" min="0" max="59" value="0" />
+                                        <div class="input-arrows">
+                                            <button class="arrow-up" data-target="timer-minutes">
+                                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                                    <path d="M1 7L6 2L11 7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                            </button>
+                                            <button class="arrow-down" data-target="timer-minutes">
+                                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                                    <path d="M1 1L6 6L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-separator">:</div>
+                                <div class="input-group">
+                                    <label data-i18n="timer.seconds">Secondi</label>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="timer-seconds" min="0" max="59" value="30" />
+                                        <div class="input-arrows">
+                                            <button class="arrow-up" data-target="timer-seconds">
+                                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                                    <path d="M1 7L6 2L11 7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                            </button>
+                                            <button class="arrow-down" data-target="timer-seconds">
+                                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                                    <path d="M1 1L6 6L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timer-presets">
+                                <button class="preset-btn" data-time="30">30s</button>
+                                <button class="preset-btn" data-time="60">1m</button>
+                                <button class="preset-btn" data-time="180">3m</button>
+                                <button class="preset-btn" data-time="300">5m</button>
+                                <button class="preset-btn" data-time="600">10m</button>
+                            </div>
+
+                            <div class="timer-buttons">
+                                <button class="btn btn-primary" id="start-timer" data-i18n="timer.start">Avvia</button>
+                                <button class="btn btn-secondary" id="pause-timer" data-i18n="timer.pause">Pausa</button>
+                                <button class="btn btn-danger" id="reset-timer" data-i18n="timer.reset">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timer History & Stats -->
+                    <div class="timer-extras">
+                        <div class="timer-saved-card">
+                            <div class="card-header">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                <h3 data-i18n="timer.saved">Timer Salvati</h3>
+                                <button class="add-preset-btn" id="add-preset-btn" title="Aggiungi nuovo preset">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19"/>
+                                        <line x1="5" y1="12" x2="19" y2="12"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="saved-presets-list" id="saved-presets">
+                                <p class="empty-message" data-i18n="timer.noSaved">Nessun timer salvato. Crea i tuoi preset personalizzati!</p>
+                            </div>
+                        </div>
+
+                        <div class="timer-stats-card">
+                            <div class="card-header">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="20" x2="12" y2="10"/>
+                                    <line x1="18" y1="20" x2="18" y2="4"/>
+                                    <line x1="6" y1="20" x2="6" y2="16"/>
+                                </svg>
+                                <h3 data-i18n="timer.stats">Statistiche</h3>
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-value" id="total-timers">0</div>
+                                    <div class="stat-label" data-i18n="timer.totalTimers">Timer Completati</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="total-time">0m</div>
+                                    <div class="stat-label" data-i18n="timer.totalTime">Tempo Totale</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="avg-timer">0m</div>
+                                    <div class="stat-label" data-i18n="timer.avgTimer">Media Timer</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="longest-timer">0m</div>
+                                    <div class="stat-label" data-i18n="timer.longest">Timer Più Lungo</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Preset Modal -->
+            <div class="modal" id="preset-modal">
+                <div class="modal-overlay" id="preset-modal-overlay"></div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 data-i18n="timer.addPreset">Aggiungi Timer Personalizzato</h3>
+                        <button class="modal-close" id="close-preset-modal">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <form id="preset-form">
+                        <div class="form-group">
+                            <label data-i18n="timer.presetName">Nome Timer</label>
+                            <input type="text" id="preset-name" placeholder="Es: Allenamento, Studio, Meditazione" maxlength="30" required>
+                        </div>
+                        <div class="form-group-inline">
+                            <div class="form-group">
+                                <label data-i18n="timer.minutes">Minuti</label>
+                                <input type="number" id="preset-minutes" min="0" max="59" value="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="timer.seconds">Secondi</label>
+                                <input type="number" id="preset-seconds" min="0" max="59" value="0" required>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="cancel-preset" data-i18n="timer.cancel">Annulla</button>
+                            <button type="submit" class="btn btn-primary" data-i18n="timer.save">Salva</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ORARIO SECTION -->
+            <section id="orario" class="section">
+                <div class="container">
+                    <h2 class="section-title" data-i18n="clock.title">🌐 Orario Mondiale</h2>
+                    
+                    <!-- Favorites Section -->
+                    <div class="favorites-header">
+                        <h3>
+                            <svg class="favorites-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                            <span data-i18n="clock.favorites">Preferiti</span>
+                        </h3>
+                        <div class="favorites-container" id="favorites-clocks">
+                            <p class="no-favorites" id="no-favorites" data-i18n="clock.noFavorites">Nessun preferito. Clicca sulla stella per salvare una città.</p>
+                        </div>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="M21 21l-4.35-4.35"></path>
+                        </svg>
+                        <input type="text" id="search-country" placeholder="Cerca paese o città..." data-i18n="clock.search">
+                    </div>
+
+                    <h3 class="all-cities-title" data-i18n="clock.allCities">Tutte le Città</h3>
+                    <div class="clocks-grid" id="world-clocks">
+                        <!-- Gli orologi verranno generati dinamicamente -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel" id="settings-panel">
+            <div class="settings-overlay" id="settings-overlay"></div>
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h2 data-i18n="settings.title">⚙️ Impostazioni</h2>
+                    <button class="settings-close" id="settings-close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="settings-body">
+                    <div class="settings-section">
+                        <h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <circle cx="12" cy="12" r="9" stroke="url(#themeIconGrad)" stroke-width="2" fill="none"/>
+                                <path d="M12 3C7.03 3 3 7.03 3 12C3 16.97 7.03 21 12 21V3Z" fill="url(#themeIconGrad)" opacity="0.5"/>
+                                <circle cx="8" cy="8" r="2" fill="url(#themeIconGrad)"/>
+                                <circle cx="16" cy="8" r="2" fill="url(#themeIconGrad)"/>
+                                <circle cx="8" cy="16" r="2" fill="url(#themeIconGrad)"/>
+                                <circle cx="16" cy="16" r="2" fill="url(#themeIconGrad)"/>
+                                <defs>
+                                    <linearGradient id="themeIconGrad" x1="0" y1="0" x2="24" y2="24">
+                                        <stop offset="0%" style="stop-color:#f59e0b"/>
+                                        <stop offset="100%" style="stop-color:#8b5cf6"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span data-i18n="settings.theme">Tema</span>
+                        </h3>
+                        <div class="setting-item">
+                            <label>
+                                <span data-i18n="settings.darkMode">Modalità Scura</span>
+                                <input type="checkbox" id="dark-mode" checked>
+                                <span class="toggle-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <circle cx="12" cy="12" r="9" stroke="url(#langIconGrad)" stroke-width="2"/>
+                                <ellipse cx="12" cy="12" rx="4" ry="9" stroke="url(#langIconGrad)" stroke-width="1.5"/>
+                                <line x1="3" y1="12" x2="21" y2="12" stroke="url(#langIconGrad)" stroke-width="1.5"/>
+                                <ellipse cx="12" cy="12" rx="9" ry="4" stroke="url(#langIconGrad)" stroke-width="1.5"/>
+                                <circle cx="12" cy="12" r="2" fill="url(#langIconGrad)"/>
+                                <defs>
+                                    <linearGradient id="langIconGrad" x1="0" y1="0" x2="24" y2="24">
+                                        <stop offset="0%" style="stop-color:#06b6d4"/>
+                                        <stop offset="100%" style="stop-color:#8b5cf6"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span data-i18n="settings.language">Lingua</span>
+                        </h3>
+                        <div class="setting-item language-selector">
+                            <label for="language-select">
+                                <span data-i18n="settings.selectLanguage">Seleziona Lingua</span>
+                            </label>
+                            <select id="language-select" class="language-dropdown">
+                                <option value="it" selected>🇮🇹 Italiano</option>
+                                <option value="en">🇬🇧 English</option>
+                                <option value="es">🇪🇸 Español</option>
+                                <option value="fr">🇫🇷 Français</option>
+                                <option value="de">🇩🇪 Deutsch</option>
+                                <option value="pt">🇵🇹 Português</option>
+                                <option value="ru">🇷🇺 Русский</option>
+                                <option value="zh">🇨🇳 中文</option>
+                                <option value="ja">🇯🇵 日本語</option>
+                                <option value="ar">🇸🇦 العربية</option>
+                            </select>
+                        </div>
+                        <p class="setting-description" data-i18n="settings.languageDesc">La lingua selezionata verrà applicata a tutta l'applicazione.</p>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <circle cx="12" cy="12" r="9" stroke="url(#timerIconGrad)" stroke-width="2"/>
+                                <circle cx="12" cy="12" r="7" stroke="url(#timerIconGrad)" stroke-width="1.5" opacity="0.3"/>
+                                <line x1="12" y1="6" x2="12" y2="12" stroke="url(#timerIconGrad)" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="12" y1="12" x2="16" y2="12" stroke="url(#timerIconGrad)" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="12" cy="12" r="1.5" fill="url(#timerIconGrad)"/>
+                                <rect x="10" y="2" width="4" height="3" rx="1" fill="url(#timerIconGrad)"/>
+                                <defs>
+                                    <linearGradient id="timerIconGrad" x1="0" y1="0" x2="24" y2="24">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="100%" style="stop-color:#764ba2"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span data-i18n="settings.timerSettings">Timer</span>
+                        </h3>
+                        <div class="setting-item">
+                            <label>
+                                <span data-i18n="settings.soundNotifications">Notifiche sonore</span>
+                                <input type="checkbox" id="sound-notifications" checked>
+                                <span class="toggle-switch"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <span data-i18n="settings.autoRepeat">Auto-ripeti timer</span>
+                                <input type="checkbox" id="auto-repeat">
+                                <span class="toggle-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <circle cx="12" cy="12" r="9" stroke="url(#clockIconGrad)" stroke-width="2"/>
+                                <ellipse cx="12" cy="12" rx="9" ry="3.5" stroke="url(#clockIconGrad)" stroke-width="1.5"/>
+                                <ellipse cx="12" cy="12" rx="4.5" ry="9" stroke="url(#clockIconGrad)" stroke-width="1.5"/>
+                                <circle cx="12" cy="12" r="1.5" fill="url(#clockIconGrad)"/>
+                                <path d="M8 8L10 10M16 8L14 10M8 16L10 14M16 16L14 14" stroke="url(#clockIconGrad)" stroke-width="1.5" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="clockIconGrad" x1="0" y1="0" x2="24" y2="24">
+                                        <stop offset="0%" style="stop-color:#10b981"/>
+                                        <stop offset="100%" style="stop-color:#06b6d4"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span data-i18n="settings.clockSettings">Orologi</span>
+                        </h3>
+                        <div class="setting-item">
+                            <label>
+                                <span data-i18n="settings.format24">Formato 24 ore</span>
+                                <input type="checkbox" id="time-format-24" checked>
+                                <span class="toggle-switch"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <span data-i18n="settings.showSeconds">Mostra secondi</span>
+                                <input type="checkbox" id="show-seconds" checked>
+                                <span class="toggle-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <rect x="3" y="4" width="18" height="16" rx="2" stroke="url(#dataIconGrad)" stroke-width="2"/>
+                                <line x1="3" y1="9" x2="21" y2="9" stroke="url(#dataIconGrad)" stroke-width="2"/>
+                                <rect x="7" y="12" width="4" height="5" fill="url(#dataIconGrad)" opacity="0.6"/>
+                                <rect x="13" y="14" width="4" height="3" fill="url(#dataIconGrad)" opacity="0.8"/>
+                                <circle cx="6" cy="6.5" r="1" fill="url(#dataIconGrad)"/>
+                                <circle cx="9" cy="6.5" r="1" fill="url(#dataIconGrad)"/>
+                                <circle cx="12" cy="6.5" r="1" fill="url(#dataIconGrad)"/>
+                                <defs>
+                                    <linearGradient id="dataIconGrad" x1="0" y1="0" x2="24" y2="24">
+                                        <stop offset="0%" style="stop-color:#ef4444"/>
+                                        <stop offset="100%" style="stop-color:#f59e0b"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span data-i18n="settings.data">Dati</span>
+                        </h3>
+                        <div class="setting-item">
+                            <button class="btn btn-danger reset-stats" id="reset-stats" data-i18n="settings.resetStats">
+                                🗑️ Resetta Statistiche
+                            </button>
+                        </div>
+                        <p class="setting-description" data-i18n="settings.resetStatsDesc">Reimposta il contatore delle visualizzazioni a zero.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Timer Finished Notification -->
+        <div class="notification" id="timer-notification">
+            <div class="notification-content">
+                <div class="notification-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+                <div class="notification-text">
+                    <h4 data-i18n="notification.timerFinished">⏰ Timer Terminato!</h4>
+                    <p data-i18n="notification.timeUp">Il tempo è scaduto</p>
+                </div>
+                <button class="notification-close" id="close-notification">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <div class="footer-logo">
+                            <svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Outer glow circles -->
+                                <circle cx="32" cy="32" r="30" fill="url(#footerGlow)" opacity="0.15"/>
+                                <circle cx="32" cy="32" r="28" stroke="url(#footerGradient)" stroke-width="0.5" opacity="0.2"/>
+                                
+                                <!-- Main clock body with gradient fill -->
+                                <circle cx="32" cy="32" r="24" fill="url(#footerBg)" opacity="0.15"/>
+                                <circle cx="32" cy="32" r="24" stroke="url(#footerGradient)" stroke-width="2.5"/>
+                                
+                                <!-- Inner circle detail -->
+                                <circle cx="32" cy="32" r="22" stroke="url(#footerGradient)" stroke-width="0.5" opacity="0.3"/>
+                                
+                                <!-- Globe meridians and parallels -->
+                                <ellipse cx="32" cy="32" rx="24" ry="10" stroke="url(#footerGradient)" stroke-width="1.5" opacity="0.35" stroke-dasharray="2 2"/>
+                                <ellipse cx="32" cy="32" rx="12" ry="24" stroke="url(#footerGradient)" stroke-width="1.5" opacity="0.35" stroke-dasharray="2 2"/>
+                                <ellipse cx="32" cy="32" rx="18" ry="24" stroke="url(#footerGradient)" stroke-width="1" opacity="0.25" stroke-dasharray="2 2"/>
+                                <line x1="8" y1="32" x2="56" y2="32" stroke="url(#footerGradient)" stroke-width="1.5" opacity="0.35" stroke-dasharray="2 2"/>
+                                
+                                <!-- Clock hands with shadow -->
+                                <line x1="32" y1="32" x2="32" y2="18" stroke="rgba(0,0,0,0.2)" stroke-width="3" stroke-linecap="round" transform="translate(0.5, 0.5)"/>
+                                <line x1="32" y1="32" x2="32" y2="18" stroke="url(#footerGradient)" stroke-width="2.5" stroke-linecap="round"/>
+                                
+                                <line x1="32" y1="32" x2="43" y2="32" stroke="rgba(0,0,0,0.2)" stroke-width="3" stroke-linecap="round" transform="translate(0.5, 0.5)"/>
+                                <line x1="32" y1="32" x2="43" y2="32" stroke="url(#footerGradient)" stroke-width="2.5" stroke-linecap="round"/>
+                                
+                                <!-- Second hand (optional - thinner) -->
+                                <line x1="32" y1="32" x2="40" y2="24" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                                
+                                <!-- Center dot with glow -->
+                                <circle cx="32" cy="32" r="4" fill="url(#footerGradient)" opacity="0.3"/>
+                                <circle cx="32" cy="32" r="3" fill="url(#footerGradient)"/>
+                                <circle cx="32" cy="32" r="1.5" fill="white" opacity="0.8"/>
+                                
+                                <!-- Enhanced hour markers -->
+                                <g opacity="0.9">
+                                    <!-- 12, 3, 6, 9 - larger markers -->
+                                    <circle cx="32" cy="11" r="2" fill="url(#footerGradient)"/>
+                                    <circle cx="53" cy="32" r="2" fill="url(#footerGradient)"/>
+                                    <circle cx="32" cy="53" r="2" fill="url(#footerGradient)"/>
+                                    <circle cx="11" cy="32" r="2" fill="url(#footerGradient)"/>
+                                    
+                                    <!-- Other hours - smaller markers -->
+                                    <circle cx="42.5" cy="15.5" r="1.2" fill="url(#footerGradient)" opacity="0.7"/>
+                                    <circle cx="48.5" cy="21.5" r="1.2" fill="url(#footerGradient)" opacity="0.7"/>
+                                    <circle cx="48.5" cy="42.5" r="1.2" fill="url(#footerGradient)" opacity="0.7"/>
+                                    <circle cx="42.5" cy="48.5" r="1.2" fill="url(#footerGradient)" opacity="0.7"/>
+                                    <circle cx="21.5" cy="48.5" r="1.2" fill="url(#footerGradient)" opacity="0.7"/>
+                                    <circle cx="15.5" cy="42.5" r="1.2" fill="url(#footerGradient)" opacity="0.7"/>
+                                    <circle cx="15.5" cy="21.5" r="1.2" fill="url(#footerGradient)" opacity="0.7"/>
+                                    <circle cx="21.5" cy="15.5" r="1.2" fill="url(#footerGradient)" opacity="0.7"/>
+                                </g>
+                                
+                                <defs>
+                                    <linearGradient id="footerGradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" style="stop-color:#667eea"/>
+                                        <stop offset="50%" style="stop-color:#764ba2"/>
+                                        <stop offset="100%" style="stop-color:#667eea"/>
+                                    </linearGradient>
+                                    <radialGradient id="footerGlow" cx="32" cy="32" r="30" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" style="stop-color:#667eea; stop-opacity:0.4"/>
+                                        <stop offset="50%" style="stop-color:#764ba2; stop-opacity:0.2"/>
+                                        <stop offset="100%" style="stop-color:#764ba2; stop-opacity:0"/>
+                                    </radialGradient>
+                                    <linearGradient id="footerBg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" style="stop-color:#667eea; stop-opacity:0.3"/>
+                                        <stop offset="100%" style="stop-color:#764ba2; stop-opacity:0.3"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span>Abdul Time</span>
+                        </div>
+                        <p class="footer-tagline" data-i18n="footer.tagline">La tua applicazione per gestire il tempo in modo intelligente</p>
+                    </div>
+
+                    <div class="footer-links">
+                        <div class="footer-section">
+                            <h4 data-i18n="footer.product">Prodotto</h4>
+                            <a href="#home" data-i18n="footer.home">Home</a>
+                            <a href="#timer" data-i18n="footer.timer">Timer</a>
+                            <a href="#orario" data-i18n="footer.worldClock">Orario Mondiale</a>
+                            <a href="contatti.html" data-i18n="footer.contacts">Contatti</a>
+                        </div>
+
+                        <div class="footer-section">
+                            <h4 data-i18n="footer.resources">Risorse</h4>
+                            <a href="contatti.html" data-i18n="footer.help">Centro Assistenza</a>
+                            <a href="contatti.html" data-i18n="footer.faq">FAQ</a>
+                            <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+                            <a href="#" data-i18n="footer.terms">Termini di Servizio</a>
+                        </div>
+
+                        <div class="footer-section">
+                            <h4 data-i18n="footer.followUs">Seguici</h4>
+                            <div class="footer-social">
+                                <a href="#" class="social-icon social-github" title="GitHub" aria-label="GitHub">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" fill="currentColor"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="social-icon social-twitter" title="Twitter" aria-label="Twitter">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="social-icon social-instagram" title="Instagram" aria-label="Instagram">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/>
+                                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                        <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="social-icon social-linkedin" title="LinkedIn" aria-label="LinkedIn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" fill="currentColor"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div class="footer-made">
+                        <span>Abdul Clock 2026</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+
+        <script src="script.js"></script>
+    </body>
+    </html>
